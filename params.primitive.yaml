@@ -1,0 +1,35 @@
+/**/*:
+  ros__parameters:
+    broker:
+      host: your-mqtt-broker.example
+      port: 1883
+    bridge:
+      ros2mqtt:
+        ros_topics:
+          - /ping/primitive
+          - /test/primitive
+        /ping/primitive:
+          mqtt_topic: pingpong/primitive
+          primitive: true
+        /test/primitive:
+          mqtt_topic: test/primitive
+          primitive: true
+      mqtt2ros:
+        mqtt_topics:
+          - pingpong/primitive
+          - test/primitive
+        pingpong/primitive:
+          ros_topic: /pong/primitive
+          primitive: true
+        test/primitive:
+          ros_topic: /test/echo
+          primitive: true
+
+
+  # | Source                        | Subscribed by | Published to              |
+  # |-------------------------------|--------------|---------------------------|
+  # | /ping/primitive (ROS)         | Bridge       | pingpong/primitive (MQTT) |
+  # | /test/primitive (ROS)         | Bridge       | test/primitive (MQTT)     |
+  # | pingpong/primitive (MQTT)     | Bridge       | /pong/primitive (ROS)     |
+  # | test/primitive (MQTT)         | Bridge       | /test/echo (ROS)          |
+  #

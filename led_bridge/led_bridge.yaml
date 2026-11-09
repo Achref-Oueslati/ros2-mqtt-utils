@@ -1,0 +1,19 @@
+# ROS 2 <-> MQTT bridge config for LED control
+/**/*:
+  ros__parameters:
+    broker:
+      host: your-mqtt-broker.example
+      port: 1883
+    bridge:
+      ros2mqtt:
+        ros_topics:
+          - /led/control
+        /led/control:
+          mqtt_topic: led/control
+          primitive: true
+      mqtt2ros:
+        mqtt_topics:
+          - led/control
+        led/control:
+          ros_topic: /led/echo
+          primitive: true
